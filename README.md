@@ -1,1 +1,1 @@
-# licence-view-confirm
+# licence-view-verification

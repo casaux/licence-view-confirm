@@ -1,0 +1,365 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>myCASA</title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="viewport" content="initial-scale=1">
+      <link rel="stylesheet" href="../mycasa-src-3.0/css/designsystem.min.css">
+      <link rel="stylesheet" href="../mycasa-src-3.0/css/casa.css">
+      <script type="text/javascript" src="../mycasa-src-3.0/js/designsystem.min.js"></script>
+      <script type="text/javascript" src="../mycasa-src-3.0/js/jquery.min.js"></script>
+      <script type="text/javascript" src="../mycasa-src-3.0/js/jquery.js"></script>
+      <script type="text/javascript">
+         /* page specific js */
+
+         $(document).ready(function() {
+
+           var hashURL = window.location.hash;
+           hashURL = hashURL.substring(1,hashURL.length);
+
+
+
+          // alert(hashURL+"/"+hashURL.search("verify")+"/"+hashURL.search("suspended"));
+
+           if(hashURL.search("verify")!=-1){
+             $("div.casa-view-only").css("display","none");
+             $("div.casa-verify-only").css("display","block");
+             $("span.casa-view-only").css("display","none");
+             $("span.casa-verify-only").css("display","inline");
+           } else {
+             $("div.casa-view-only").css("display","block");
+             $("div.casa-verify-only").css("display","none");
+             $("span.casa-view-only").css("display","inline");
+             $("span.casa-verify-only").css("display","none");
+           }
+
+
+            if(hashURL.search("suspended")!=-1){
+                $("div.casa-status-suspended").css("display","block");
+                $("span.casa-status-suspended").css("display","inline");
+            }
+
+
+            if(
+              (hashURL.search("suspended")!=-1 && hashURL.search("verify")!=-1)
+              ||
+                (hashURL.search("suspended")==-1 && hashURL.search("verify")==-1)
+              ||
+                (hashURL.search("suspended")==0 && hashURL.search("verify")==-1)
+            ){
+              $("div.casa-status-verify-only div.au-page-alerts--success").css("display","none");
+            }
+
+
+
+
+
+
+           $("#download").bind("click",function(){
+               $(".casa-modal").css("display","block");
+           });
+
+           $(".casa-modal-close").bind("click",function(){
+               $(".casa-modal").css("display","none");
+           });
+
+           $("#show-back").bind("click",function(){
+               $(this).addClass("show-back-full");
+           });
+
+           $("#show-back img").bind("click",function(){
+               $("#show-back").removeClass("show-back-full");
+               $("#show-back img").css("display","none");
+           });
+
+            $("#load-licence").bind("click",function(){
+                $("#loading").css("display","block");
+
+
+                setInterval(function(){
+                  $("#licence").css("display","block");
+                  $("#loader").css("display","none");
+                }, 1000);
+
+            });
+
+
+
+
+
+         });
+      </script>
+      <style type="text/css">
+         /* page specific css */
+         #wallet{position:absolute;top:0;left:0;z-index:99999;display:none;bottom:0;right:0;background:#fff;}
+
+
+          .casa-status-suspended{display:none;}
+          .casa-status-verified{display:none;}
+
+          .casa-view-only nav, .casa-verify-only nav{margin-bottom:1rem}
+
+
+          #loading{background:rgba(0,0,0,0.2);position:absolute;top:0;left:0;z-index:9999999999;display:none;right:0;bottom:0}
+       #loading p{font-size:1.3rem;line-height:1.5rem;padding:1rem !important;background:#5c5c5c;color:#fff;font-weight:bold;width:250px;display:block; border-radius: 5px;text-align:center;margin:300px auto auto auto !important;}
+
+       #loading #loader{animation: rotation 2s infinite linear;}
+
+       #licence {display:none;position:absolute;top:0;right:0;bottom:0;left:0;z-index:9999999999999;background: #f2f2f7;}
+       #load-licence{margin-bottom:2000px;display:block;}
+
+       #show-back{position: absolute;top:0;right:0;width:50px;height:50px;cursor:pointer;}
+       #show-back img{display:none;}
+
+       #show-back.show-back-full{cursor:default;left:0;top:0;width:auto;height:auto;}
+       #show-back.show-back-full img{display:block;}
+
+       @keyframes rotation {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(359deg);
+          }
+        }
+
+
+        .casa-modal{display:none;}
+
+      </style>
+   </head>
+   <body class="live-demo au-body au-grid">
+      <main class="au-grid">
+         <div class="header">
+            <div class="container">
+               <div class="row">
+                  <div class="logo au-body au-body--dark">
+                     <a href="../mycasa-dec-2020/index.html"><img src="../mycasa-src/img/CASALOGO-white-i.svg"></a>
+                  </div>
+                  </div>
+            </div>
+         </div>
+         <div class="body">
+
+
+
+           <div class="casa-modal">
+              		   <div class="casa-modal-inner">
+              			   <div class="casa-modal-header">
+              				  <h3>Remote pilot licence</h3>
+
+              				   <div class="casa-modal-close"><a href="#"><span>Close</span></a></div>
+
+
+              			   </div>
+              			   				<div class="casa-modal-body">
+
+                               <p>There are two parts of the digital remote pilot licence. The first part is what you see inside your Apple Wallet on your iPhone and contains a QR code that allows someone to validate your licence details as they appear on the CASA system.</p>
+
+                               <p>The second part is all the details of your remote pilot licence as appears on your paper licence. To access this view, follow the instructions below.</p>
+
+                               <p><strong>Tap the 3 dots at the top right of your screen</strong></p>
+
+           <p><img src="wallet1-repl.png" /></p>
+
+             <p><strong>Scroll down through the licence view to see all the details of your licence.</strong></p>
+
+           <p><img src="wallet2-repl.png" /></p>
+
+           <p>You can add the remote pilot licence to your Apple Wallet below. </p>
+
+           <p class="au-callout"><strong>
+             Note that by adding the remote pilot licence to your Apple Wallet, you are consenting to your details being confirmed through the QR code on the front of the digital view to anyone you show the digital view to.
+
+
+           </strong>
+
+           </p>
+           <br />
+           <a href="#" id="load-licence"><img src="Add_to_Apple_Wallet_rgb_US-UK.svg" style="width:100%"></a>
+
+
+                             </div>
+              			 </div>
+              	   </div>
+
+            <div id="loading">
+            <p>Loading licence.<br /> Please wait...<br />
+            <img src="loader.png" id="loader">
+            </div>
+
+            <div id="licence">
+              <div id="show-back"><img src="RePL-back@2x.png"></div>
+              <img src="RePL.png">
+            </div>
+
+
+
+
+
+			<div class="banner">
+				<div class=container>
+					<div class="row">
+					 <div class="col-md-12">
+				This service is currently in beta, we encourage you to <a href="../flight-review/feedback.html">provide feedback</a>
+				</div>
+				</div>
+			</div>
+		</div>
+         <div class="container">
+           <div class="casa-view-only">
+               <nav class="au-breadcrumbs" aria-label="breadcrumb">
+                  <ul class="au-link-list au-link-list--inline">
+                     <li><a href="#">myCASA</a></li>
+                     <li>Remote pilot licence (<abbr title="Remote pilot licence">RePL</abbr>)</li>
+                  </ul>
+               </nav>
+            </div>
+            <div class="casa-verify-only">
+               <nav class="au-breadcrumbs" aria-label="breadcrumb">
+                  <ul class="au-link-list au-link-list--inline">
+                     <li><a href="#">myCASA</a></li>
+                     <li><a href="#">Confirm details of a digital licence</a></li>
+                     <li>Licence details</li>
+                  </ul>
+               </nav>
+            </div>
+
+            <div class="casa-status-suspended">
+               <div role="alert" class="au-body au-page-alerts au-page-alerts--error">
+                 <div class="row">
+                     <div class="col-xs-12 col-md-12 col-lg-9">
+                         <h3>Please review licence details</h3>
+                         <p>This licence has suspensions against it. Please <a href="https://www.casa.gov.au/about-us/contact-us">contact CASA</a> for more information.</p>
+                     </div>
+                 </div>
+               </div>
+           </div>
+
+           <div class="casa-status-verify-only">
+              <div role="alert" class="au-body au-page-alerts au-page-alerts--success">
+                <div class="row">
+                    <div class="col-xs-12 col-md-12 col-lg-9">
+                        <h3>Licence verified</h3>
+                        <p>This licence is valid and in force</p>
+                    </div>
+                </div>
+              </div>
+          </div>
+
+
+			 <div class="casa-section">
+               <header class="au-header" role="banner">
+                  <h1 class="break desktop au-header-heading">Remote pilot licence (<abbr title="Remote pilot licence">RePL</abbr>) <span class="badge badge-expired casa-status-suspended">Suspended</span></h1>
+				   				   <a class="au-direction-link" href="javascript:history.back()">
+					<span class="au-direction-link__arrow au-direction-link__arrow--left" aria-hidden="true"></span>Back
+					</a>
+               </header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+               <div class="au-form-group">
+
+                         </div>
+<div class="casa-view-only">
+               <div class="au-form-group casa-mobile-only">
+                 <a class="au-btn" href="#" id="download">Download digital licence for iPhone</a>
+
+
+</div>
+</div>
+
+<div class="au-form-group">
+             <div class="au-table__wrapper">
+               <table class="au-table au-table--striped">
+                     <caption class="au-table__caption">Licence holder details</caption>
+                     <thead class="au-table__head">
+                         <tr class="au-table__row">
+                             <th scope="col" class="au-table__header au-table__header--width-25">Name</th>
+                             <th scope="col" class="au-table__header" colspan="2">Katherine Vivianne Charlotte van der Schinklehaven</th>
+                         </tr>
+                     </thead>
+                     <tbody class="au-table__body">
+                         <tr class="au-table__row">
+                             <td class="au-table__cell">ARN and licence number</td>
+                             <td class="au-table__cell">7654321</td>
+                               <td class="au-table__cell"> </td>
+                         </tr>
+                         <tr class="au-table__row">
+                             <td class="au-table__cell">Date of birth</td>
+                             <td class="au-table__cell">27/11/2000</td>
+                             <td class="au-table__cell"> </td>
+                         </tr>
+                         <tr class="au-table__row">
+                             <td class="au-table__cell">Nationality</td>
+                             <td class="au-table__cell">Australian</td>
+                             <td class="au-table__cell"> </td>
+                         </tr>
+                     </tbody>
+                 </table>
+             </div>
+             </div>
+
+<div class="au-form-group">
+<div class="au-table__wrapper">
+    <table class="au-table au-table--striped">
+        <caption class="au-table__caption"><abbr title="Remotely piloted aircraft">RPA</abbr> category and type</caption>
+        <thead class="au-table__head">
+            <tr class="au-table__row">
+                <th scope="col" class="au-table__header au-table__header--width-33"><abbr title="Remotely piloted aircraft">RPA</abbr> category</th>
+                <th scope="col" class="au-table__header au-table__header--width-33">Weight class / capacity</th>
+                <th scope="col" class="au-table__header au-table__header--width-33 au-table__header--numeric">Granted date</th>
+            </tr>
+        </thead>
+        <tbody class="au-table__body">
+          <tr class="au-table__row">
+              <td class="au-table__cell">Powered lift</td>
+              <td class="au-table__cell">Up to 7kg</td>
+              <td class="au-table__cell  au-table__cell--numeric">12/06/2019</td>
+          </tr>
+            <tr class="au-table__row">
+                <td class="au-table__cell">Multi-rotor</td>
+                <td class="au-table__cell">Up to 25kg</td>
+                <td class="au-table__cell  au-table__cell--numeric">24/03/2019</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+
+
+				<div class="au-form-group">
+                <a class="au-direction-link" href="javascript:history.back()">
+					<span class="au-direction-link__arrow au-direction-link__arrow--left" aria-hidden="true"></span>Return to myCASA
+					</a>
+
+
+				</div>
+
+
+            </div>
+
+
+            </div>
+         </div>
+          <div class="footer">
+
+            <div class="footer-wrapper">
+               <iframe src="../mycasa-src/footer.html" frameborder="0" border="0" scrolling="no"></iframe>
+            </div>
+         </div>
+      </main>
+   </body>
+</html>
